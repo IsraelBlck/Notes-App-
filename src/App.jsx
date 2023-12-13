@@ -2,6 +2,7 @@ import React from "react";
 import Editor from "../components/Editor";
 import Sidebar from "../components/Sidebar";
 import { nanoid } from "nanoid";
+import Split from 'react-split'
 
 
 export default function App(){
@@ -31,7 +32,7 @@ export default function App(){
         : oldNote
       )
   }
-//finc current note
+//find current note
 
 function findCurrentNote(){
   return notes.find(note => note.id === currentNoteId)
@@ -39,6 +40,42 @@ function findCurrentNote(){
 }
 
   return (
-    <h1>Hello World</h1>
+    <main>
+      {
+        
+        notes.length > 0 ?(
+          <Split
+            sizes={[30,70]}
+            direction="horizontal"
+            className="split"
+          >
+              <Sidebar 
+                notes={notes}
+                currentNote={findCurrentNote}
+                setCurrentNoteId={setCurrentNoteId}
+                newNote={createNote}
+              />
+              {
+                currentNoteId && notes.length > 0 &&
+                  <Editor 
+                      currentNote={findCurrentNote}
+                      updateNote={updateNote}
+                  />
+              }
+          </Split>
+        ) : (
+          <div className="no-notes">
+            <h1>You have no notes </h1>
+            <button
+            onClick={createNote}
+            className="first-note"
+            >
+              Create Note
+            </button>
+          </div>
+        )
+      
+      }
+    </main>
   )
 }
