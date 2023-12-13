@@ -22,6 +22,21 @@ export default function App(){
     setCurrentNoteId(newNote.id)
   }
 
+  ///update the note
+
+  function updateNote(text){
+    setNotes(oldNote = 
+        oldNote.id === currentNoteId
+        ? {...oldNote, body: 'write'}
+        : oldNote
+      )
+  }
+//finc current note
+
+function findCurrentNote(){
+  return notes.find(note => note.id === currentNoteId)
+  || notes[0]
+}
 
   return (
     <h1>Hello World</h1>
